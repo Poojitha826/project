@@ -1,0 +1,107 @@
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" href="formcss.css">
+
+  <title>Registration Form</title>
+
+
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Register</h2>
+    <form id="regForm" action="/submit" method="get">
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" >
+      <span class="error" id="nameError"></span>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" >
+      <span class="error" id="emailError"></span>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" >
+      <span class="error" id="passwordError"></span>
+
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" >
+      <span class="error" id="confirmPasswordError"></span>
+
+      <label>Gender:</label>
+      <div class="inline-group gender-group">
+        <input type="radio" id="male" name="gender" value="Male" >
+        <label for="male" style="margin:0;">Male</label>
+
+        <input type="radio" id="female" name="gender" value="Female">
+        <label for="female" style="margin:0;">Female</label>
+
+        <input type="radio" id="other" name="gender" value="Other">
+        <label for="other" style="margin:0;">Other</label>
+      </div>
+      <span class="error" id="genderError"></span>
+
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob" >
+      <span class="error" id="dobError"></span>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" placeholder="10-digit number" >
+      <span class="error" id="phoneError"></span>
+
+      <label for="address">Address:</label>
+      <textarea id="address" name="address" rows="3" ></textarea>
+      <span class="error" id="addressError"></span>
+
+      <label for="country">Country:</label>
+      <select id="country" name="country" >
+        <option value="">--Select--</option>
+        <option value="India">India</option>
+        <option value="USA">USA</option>
+        <option value="UK">UK</option>
+        <option value="Canada">Canada</option>
+        <option value="Other">Other</option>
+      </select>
+      <span class="error" id="countryError"></span>
+
+      <label>Skills / Interests:</label>
+      <div class="inline-group">
+        <input type="checkbox" id="html" name="skills" value="HTML">
+        <label for="html" style="margin:0;">HTML</label>
+
+        <input type="checkbox" id="css" name="skills" value="CSS">
+        <label for="css" style="margin:0;">CSS</label>
+
+        <input type="checkbox" id="js" name="skills" value="JavaScript">
+        <label for="js" style="margin:0;">JS</label>
+
+        <input type="checkbox" id="node" name="skills" value="NodeJS">
+        <label for="node" style="margin:0;">NodeJS</label>
+      </div>
+      <span class="error" id="skillsError"></span>
+
+      <label for="profilePic">Profile Picture:</label>
+      <input type="file" id="profilePic" name="profilePic">
+      <span class="error" id="profilePicError"></span>
+
+      
+      <button type="submit">Submit</button>
+      <p class="success" id="successMessage"></p>
+    </form>
+  </div>
+
+
+</body>
+<script src="formscript.js"></script>
+</html>

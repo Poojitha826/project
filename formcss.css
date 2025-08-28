@@ -1,0 +1,87 @@
+  
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+
+    .form-container {
+      background-color: white;
+      padding: 30px 40px;
+      width: 1000px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .form-container label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .form-container input,
+    .form-container select,
+    .form-container textarea {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .inline-group {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    /* Space between gender and dob */
+    .gender-group {
+      margin-bottom: 20px;
+    }
+
+    /* Terms in same line */
+    .terms-group {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .success {
+      color: green;
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  
