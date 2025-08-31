@@ -1,112 +1,175 @@
 
+  function validateName(name) {
+    if (name.trim().length < 2) {
+      return 'Name must be at least 2 characters';
+    }
+    return '';
+  }
 
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
-const confirmPasswordInput = document.getElementById('confirmPassword');
-const genderInputs = document.getElementsByName('gender');
-const dobInput = document.getElementById('dob');
-const phoneInput = document.getElementById('phone');
-const addressInput = document.getElementById('address');
-const countryInput = document.getElementById('country');
-const skillsInputs = document.querySelectorAll('input[name="skills"]');
-const termsInput = document.getElementById('terms');
+  function validateEmail(email) {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!pattern.test(email.trim())) {
+      return 'Please enter a valid email';
+    }
+    return '';
+  }
 
-// Validation functions
-function validateName(name) {
-  return name.trim() === '' ? 'Name is required' : (name.trim().length < 2 ? 'Name must be at least 2 characters' : '');
-}
+  function validatePassword(password) {
+    if (password.length < 6) {
+      return 'Password must be at least 6 characters';
+    }
+    return '';
+  }
 
-function validateEmail(email) {
-  if(email.trim() === '') return 'Email is required';
-  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return !pattern.test(email.trim()) ? 'Please enter a valid email' : '';
-}
+  function validateConfirmPassword(password, confirmPassword) {
+    if (password !== confirmPassword) {
+      return 'Passwords do not match';
+    }
+    return '';
+  }
 
-function validatePassword(password) {
-  return password === '' ? 'Password is required' : (password.length < 6 ? 'Password must be at least 6 characters' : '');
-}
+  function validateGender() {
+    const genders = document.querySelectorAll('input[name="gender"]:checked');
+    if (genders.length === 0) {
+      return 'Please select a gender';
+    }
+    return '';
+  }
 
-function validateConfirmPassword(password, confirm) {
-  return confirm === '' ? 'Confirm Password is required' : (password !== confirm ? 'Passwords do not match' : '');
-}
+  function validateDob(dob) {
+    if (!dob) {
+      return 'Please select your date of birth';
+    }
+    return '';
+  }
 
-function validateGender() {
-  return Array.from(genderInputs).some(input => input.checked) ? '' : 'Please select a gender';
-}
+  function validatePhone(phone) {
+    const pattern = /^[0-9]{10}$/;
+    if (!pattern.test(phone.trim())) {
+      return 'Enter a valid 10-digit phone number';
+    }
+    return '';
+  }
 
-function validateDOB(dob) {
-  return dob === '' ? 'Date of Birth is required' : '';
-}
+  function validateAddress(address) {
+    if (address.trim().length < 5) {
+      return 'Address must be at least 5 characters';
+    }
+    return '';
+  }
 
-function validatePhone(phone) {
-  if(phone === '') return 'Phone number is required';
-  return !/^\d{10}$/.test(phone) ? 'Phone must be 10 digits' : '';
-}
+  function validateCountry(country) {
+    if (!country) {
+      return 'Please select a country';
+    }
+    return '';
+  }
 
-function validateAddress(address) {
-  return address.trim() === '' ? 'Address is required' : '';
-}
+  function validateSkills() {
+    const skills = document.querySelectorAll('input[name="skills"]:checked');
+    if (skills.length === 0) {
+      return 'Please select at least one skill';
+    }
+    return '';
+  }
 
-function validateCountry(country) {
-  return country === '' ? 'Please select a country' : '';
-}
+  function validateProfilePic(file) {
+    if (!file) {
+      return 'Please upload a profile picture';
+    }
+    return '';
+  }
 
-function validateSkills() {
-  return Array.from(skillsInputs).some(input => input.checked) ? '' : 'Select at least one skill';
-}
+  // Inputs
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const confirmPasswordInput = document.getElementById('confirmPassword');
+  const dobInput = document.getElementById('dob');
+  const phoneInput = document.getElementById('phone');
+  const addressInput = document.getElementById('address');
+  const countryInput = document.getElementById('country');
+  const profilePicInput = document.getElementById('profilePic');
 
-function validateTerms() {
-  return termsInput.checked ? '' : 'You must agree to the terms';
-}
+  // Live validation
+  profilePicInput.addEventListener('input', () => {
+    document.getElementById('profilePicError').textContent =
+      validateProfilePic(profilePicInput.value);
+  });
 
-// Real-time validation
-nameInput.addEventListener('input', () => document.getElementById('nameError').textContent = validateName(nameInput.value));
-emailInput.addEventListener('input', () => document.getElementById('emailError').textContent = validateEmail(emailInput.value));
-passwordInput.addEventListener('input', () => document.getElementById('passwordError').textContent = validatePassword(passwordInput.value));
-confirmPasswordInput.addEventListener('input', () => document.getElementById('confirmPasswordError').textContent =
-  validateConfirmPassword(passwordInput.value, confirmPasswordInput.value));
-genderInputs.forEach(input => input.addEventListener('change', () => document.getElementById('genderError').textContent = validateGender()));
-dobInput.addEventListener('input', () => document.getElementById('dobError').textContent = validateDOB(dobInput.value));
-phoneInput.addEventListener('input', () => document.getElementById('phoneError').textContent = validatePhone(phoneInput.value));
-addressInput.addEventListener('input', () => document.getElementById('addressError').textContent = validateAddress(addressInput.value));
-countryInput.addEventListener('change', () => document.getElementById('countryError').textContent = validateCountry(countryInput.value));
-skillsInputs.forEach(input => input.addEventListener('change', () => document.getElementById('skillsError').textContent = validateSkills()));
-termsInput.addEventListener('change', () => document.getElementById('termsError').textContent = validateTerms());
+  phoneInput.addEventListener('input', () => {
+    document.getElementById('phoneError').textContent =
+      validatePhone(phoneInput.value);
+  });
 
-// Form submission
-document.getElementById('regForm').onsubmit = function(event) {
-  event.preventDefault(); // Prevent redirect
+  addressInput.addEventListener('input', () => {
+    document.getElementById('addressError').textContent =
+      validateAddress(addressInput.value);
+  });
 
-  // Run all validations
-  const errors = {
-    name: validateName(nameInput.value),
-    email: validateEmail(emailInput.value),
-    password: validatePassword(passwordInput.value),
-    confirmPassword: validateConfirmPassword(passwordInput.value, confirmPasswordInput.value),
-    gender: validateGender(),
-    dob: validateDOB(dobInput.value),
-    phone: validatePhone(phoneInput.value),
-    address: validateAddress(addressInput.value),
-    country: validateCountry(countryInput.value),
-    skills: validateSkills(),
-    terms: validateTerms()
+  countryInput.addEventListener('input', () => {
+    document.getElementById('countryError').textContent =
+      validateCountry(countryInput.value);
+  });
+
+  nameInput.addEventListener('input', () => {
+    document.getElementById('nameError').textContent =
+      validateName(nameInput.value);
+  });
+
+  emailInput.addEventListener('input', () => {
+    document.getElementById('emailError').textContent =
+      validateEmail(emailInput.value);
+  });
+
+  passwordInput.addEventListener('input', () => {
+    document.getElementById('passwordError').textContent =
+      validatePassword(passwordInput.value);
+  });
+
+  confirmPasswordInput.addEventListener('input', () => {
+    document.getElementById('confirmPasswordError').textContent =
+      validateConfirmPassword(passwordInput.value, confirmPasswordInput.value);
+  });
+
+  dobInput.addEventListener('input', () => {
+    document.getElementById('dobError').textContent =
+      validateDob(dobInput.value);
+  });
+
+  // On form submit
+  document.getElementById('regForm').onsubmit = function (event) {
+    event.preventDefault();
+
+    let hasError = false;
+
+    // Run all validations
+    document.getElementById('nameError').textContent = validateName(nameInput.value);
+    document.getElementById('emailError').textContent = validateEmail(emailInput.value);
+    document.getElementById('passwordError').textContent = validatePassword(passwordInput.value);
+    document.getElementById('confirmPasswordError').textContent = validateConfirmPassword(passwordInput.value, confirmPasswordInput.value);
+    document.getElementById('genderError').textContent = validateGender();
+    document.getElementById('dobError').textContent = validateDob(dobInput.value);
+    document.getElementById('phoneError').textContent = validatePhone(phoneInput.value);
+    document.getElementById('addressError').textContent = validateAddress(addressInput.value);
+    document.getElementById('countryError').textContent = validateCountry(countryInput.value);
+    document.getElementById('skillsError').textContent = validateSkills();
+    document.getElementById('profilePicError').textContent = validateProfilePic(profilePicInput.value);
+
+    // Check if any error exists
+    const errors = document.querySelectorAll('.error');
+    errors.forEach(err => {
+      if (err.textContent !== '') {
+        hasError = true;
+      }
+    });
+
+    if (hasError) {
+      alert('Please fill all fields correctly before submitting');
+      return; // stop submission
+    }
+
+    alert("REGISTERED SUCCESSFULLY");
+    this.submit();
   };
 
-  // Show errors
-  for (const key in errors) {
-    const span = document.getElementById(`${key}Error`);
-    if(span) span.textContent = errors[key];
-  }
-
-  // Check if any errors exist
-  const hasErrors = Object.values(errors).some(msg => msg !== '');
-  const successMsg = document.getElementById('successMessage');
-  if(hasErrors){
-    successMsg.textContent = '';
-    alert('Please fix all errors before submitting');
-  } else {
-    successMsg.textContent = 'REGISTERED SUCCESSFULLY!';
-    // Here you can handle the actual submission with AJAX if needed
-  }
-};
